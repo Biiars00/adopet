@@ -1,0 +1,691 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API",
+    "description": "API documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "AdoPet"
+    }
+  ],
+  "paths": {
+    "/pet": {
+      "get": {
+        "tags": ["Pets"],
+        "summary": "Lista todos os pets",
+        "description": "Obtém uma lista de todos os pets.",
+        "responses": {
+          "200": {
+            "description": "Sucesso ao listar os pets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "age": {
+                        "type": "number"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "local": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Pets"],
+        "summary": "Adiciona um novo pet",
+        "description": "Adiciona um novo pet à lista de pets.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "age": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pet adicionado com sucesso"
+          },
+          "'400'": {
+            "description": "Requisição inválida"
+          }
+        }
+      }
+    },
+    "/pet/{id}": {
+      "get": {
+        "tags": ["Pets"],
+        "summary": "Retorna um pet pelo ID",
+        "description": "Retorna um pet com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID do pet a ser retornado",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pet encontrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "age": {
+                      "type": "number"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "local": {
+                      "type": "string"
+                    },
+                    "size": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pet não encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Pets"],
+        "summary": "Atualiza um pet existente",
+        "description": "Atualiza as informações de um pet existente com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID do pet a ser atualizado",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "age": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pet atualizado com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Pet não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Pets"],
+        "summary": "Remove um pet existente",
+        "description": "Remove um pet existente com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID do pet a ser removido",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pet removido com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Pet não encontrado"
+          }
+        }
+      }
+    },
+    "/institution": {
+      "get": {
+        "tags": ["Institutions"],
+        "summary": "Obtém a lista de instituições",
+        "description": "Obtém uma lista de todas as instituições cadastradas.",
+        "responses": {
+          "200": {
+            "description": "Sucesso ao listar os pets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "cpfCnpj": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "local": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Erro ao obter a lista de instituições"
+        }
+      },
+      "post": {
+        "tags": ["Institutions"],
+        "summary": "Adiciona uma nova instituição",
+        "description": "Adiciona uma nova instituição à lista de instituições.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpfCnpj": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Instituição adicionada com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "500": {
+            "description": "Erro ao adicionar a instituição"
+          }
+        }
+      }
+    },
+    "/institution/{id}": {
+      "get": {
+        "tags": ["Institutions"],
+        "summary": "Obtém uma instituição pelo ID",
+        "description": "Obtém informações de uma instituição com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID da instituição a ser obtida",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações da instituição obtidas com sucesso"
+          },
+          "404": {
+            "description": "Instituição não encontrada"
+          },
+          "500": {
+            "description": "Erro ao obter informações da instituição"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Institutions"],
+        "summary": "Atualiza uma instituição existente",
+        "description": "Atualiza as informações de uma instituição existente com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID da instituição a ser atualizada",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpfCnpj": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Instituição atualizada com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Instituição não encontrada"
+          },
+          "500": {
+            "description": "Erro ao atualizar a instituição"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Institutions"],
+        "summary": "Remove uma instituição existente",
+        "description": "Remove uma instituição existente com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID da instituição a ser removida",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instituição removida com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Instituição não encontrada"
+          },
+          "500": {
+            "description": "Erro ao remover a instituição"
+          }
+        }
+      }
+    },
+    "/adopter": {
+      "get": {
+        "tags": ["Adopters"],
+        "summary": "Obtém o registro de todos os adotantes",
+        "description": "Obtém uma lista de todos os adotantes registrados.",
+        "responses": {
+          "200": {
+            "description": "Lista de adotantes obtida com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "cpf": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "local": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao obter a lista de adotantes"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Adopters"],
+        "summary": "Adiciona um novo registro de adotante",
+        "description": "Adiciona um novo registro de adotante à lista de adotantes.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registro de adotante adicionado com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "500": {
+            "description": "Erro ao adicionar o registro de adotante"
+          }
+        }
+      }
+    },
+    "/adopter/{id}": {
+      "get": {
+        "tags": ["Adopters"],
+        "summary": "Obtém o registro de um adotante pelo ID",
+        "description": "Obtém informações de um adotante com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID do adotante a ser obtido",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações do adotante obtidas com sucesso"
+          },
+          "404": {
+            "description": "Adotante não encontrado"
+          },
+          "500": {
+            "description": "Erro ao obter informações do adotante"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Adopters"],
+        "summary": "Atualiza um registro de adotante existente",
+        "description": "Atualiza as informações de um registro de adotante existente com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID do registro de adotante a ser atualizado",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registro de adotante atualizado com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Registro de adotante não encontrado"
+          },
+          "500": {
+            "description": "Erro ao atualizar o registro de adotante"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Adopters"],
+        "summary": "Remove um registro de adotante existente",
+        "description": "Remove um registro de adotante existente com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID do registro de adotante a ser removido",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro de adotante removido com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Registro de adotante não encontrado"
+          },
+          "500": {
+            "description": "Erro ao remover o registro de adotante"
+          }
+        }
+      }
+    },
+    "/adoption/{id}": {
+      "post": {
+        "tags": ["Adoptions"],
+        "summary": "Adota um pet",
+        "description": "Adota um pet com base no ID fornecido.",
+        "parameters": [
+          {
+            "in": "path",
+            "id": "id",
+            "required": true,
+            "description": "ID do pet a ser adotado",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["cpf", "cpfCnpj"],
+                "properties": {
+                  "cpf": {
+                    "type": "string"
+                  },
+                  "cpfCnpj": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pet adotado com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "404": {
+            "description": "Pet não encontrado"
+          },
+          "500": {
+            "description": "Erro ao adotar o pet"
+          }
+        }
+      }
+    }
+  }
+}
